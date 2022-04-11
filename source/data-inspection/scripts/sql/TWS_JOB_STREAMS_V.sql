@@ -1,0 +1,24 @@
+-- This script is provided by Fubon.
+
+CREATE VIEW BDP_PIPE.TWS_JOB_STREAMS_V AS
+SELECT
+    SNAP_DATE,
+    JOB_STREAM_NAME,
+    SCHEDULED_TIME,
+    CASE STATUS
+        WHEN 'H' THEN 'HOLD'
+        WHEN 'C' THEN 'CANCELED'
+        WHEN 'W' THEN 'WAIT'
+        WHEN 'B' THEN 'BLOCKED'
+        WHEN 'E' THEN 'ERROR'
+        WHEN 'O' THEN 'SUCC'
+        WHEN 'R' THEN 'READY'
+        WHEN 'S' THEN 'RUNNING'
+        WHEN 'U' THEN 'UNDECIDED'
+        WHEN 'X' THEN 'SUPPRESSED'
+        ELSE ''
+        END STATUS,
+    EXEC_DATE
+FROM ODS_SYSTEM.TWS_PLN_PLAN_JOB_STREAMS_V
+WHERE Workstation_name = 'FODSETL'
+  AND JOB_STREAM_NAME LIKE 'BDP%';

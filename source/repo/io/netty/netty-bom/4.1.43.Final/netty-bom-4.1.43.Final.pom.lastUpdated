@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Apr 11 17:45:56 CST 2022
+https\://repo.maven.apache.org/maven2/.lastUpdated=1649670356237
+https\://repo.spring.io/libs-milestone/.error=Could not transfer artifact io.netty\:netty-bom\:pom\:4.1.43.Final from/to spring-milestones (https\://repo.spring.io/libs-milestone)\: Authentication failed for https\://repo.spring.io/libs-milestone/io/netty/netty-bom/4.1.43.Final/netty-bom-4.1.43.Final.pom 401 Unauthorized
+@default-spring-milestones-https\://repo.spring.io/libs-milestone/.lastUpdated=1649670355940

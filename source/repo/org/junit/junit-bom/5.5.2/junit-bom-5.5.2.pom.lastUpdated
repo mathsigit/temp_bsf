@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Apr 11 17:46:04 CST 2022
+https\://repo.maven.apache.org/maven2/.lastUpdated=1649670364138
+https\://repo.spring.io/libs-milestone/.error=Could not transfer artifact org.junit\:junit-bom\:pom\:5.5.2 from/to spring-milestones (https\://repo.spring.io/libs-milestone)\: Authentication failed for https\://repo.spring.io/libs-milestone/org/junit/junit-bom/5.5.2/junit-bom-5.5.2.pom 401 Unauthorized
+@default-spring-milestones-https\://repo.spring.io/libs-milestone/.lastUpdated=1649670363848

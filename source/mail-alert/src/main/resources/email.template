@@ -1,0 +1,16 @@
+###########################
+Send Mail LIST value
+JS NAME	    : @JOB_STREAM_NAME
+TABLE OWNER	: @TABLE_OWNER
+TABLE NAME	: @TABLE_NAME
+SEND TO		: @OWNER_EMAIL
+###########################
+
+###########################
+Event Parameter value
+ETL METHOD	:  @ETL_METHOD
+RUN_CYCLE	:  @RUN_CYCLE
+@@EVENT-TEMPLATE
+VALIDATE_TIME : @DI_DATETIME
+
+###########################

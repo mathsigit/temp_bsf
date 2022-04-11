@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    show-sql: true
+
+logging:
+  level:
+    org:
+      springframework: ERROR
+
+jasypt:
+  encryptor:
+    password: island
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
+
+

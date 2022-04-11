@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Apr 11 17:46:19 CST 2022
+https\://repo.maven.apache.org/maven2/.lastUpdated=1649670379104
+https\://repo.spring.io/libs-milestone/.error=Could not transfer artifact io.fabric8\:kubernetes-client-bom\:pom\:4.1.0 from/to spring-milestones (https\://repo.spring.io/libs-milestone)\: Authentication failed for https\://repo.spring.io/libs-milestone/io/fabric8/kubernetes-client-bom/4.1.0/kubernetes-client-bom-4.1.0.pom 401 Unauthorized
+@default-spring-milestones-https\://repo.spring.io/libs-milestone/.lastUpdated=1649670378811

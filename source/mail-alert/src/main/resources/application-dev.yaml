@@ -1,0 +1,16 @@
+logging:
+  level:
+    root: DEBUG
+    org:
+      springframework:
+        jdbc:
+          core: TRACE
+
+jasypt:
+  encryptor:
+    password: island
+
+mail:
+  sender:
+    email: "git@haredb.com"
+    passwd: ENC(WEFHaycaZBurnujSJ+nUGAHHXkgwvhKF)

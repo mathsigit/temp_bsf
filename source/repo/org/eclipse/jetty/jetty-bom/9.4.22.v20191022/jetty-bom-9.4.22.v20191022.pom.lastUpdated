@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Apr 11 17:45:59 CST 2022
+https\://repo.maven.apache.org/maven2/.lastUpdated=1649670359757
+https\://repo.spring.io/libs-milestone/.error=Could not transfer artifact org.eclipse.jetty\:jetty-bom\:pom\:9.4.22.v20191022 from/to spring-milestones (https\://repo.spring.io/libs-milestone)\: Authentication failed for https\://repo.spring.io/libs-milestone/org/eclipse/jetty/jetty-bom/9.4.22.v20191022/jetty-bom-9.4.22.v20191022.pom 401 Unauthorized
+@default-spring-milestones-https\://repo.spring.io/libs-milestone/.lastUpdated=1649670359463

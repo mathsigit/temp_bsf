@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Apr 11 17:46:00 CST 2022
+https\://repo.maven.apache.org/maven2/.lastUpdated=1649670360861
+https\://repo.spring.io/libs-milestone/.error=Could not transfer artifact org.glassfish.jersey\:jersey-bom\:pom\:2.29.1 from/to spring-milestones (https\://repo.spring.io/libs-milestone)\: Authentication failed for https\://repo.spring.io/libs-milestone/org/glassfish/jersey/jersey-bom/2.29.1/jersey-bom-2.29.1.pom 401 Unauthorized
+@default-spring-milestones-https\://repo.spring.io/libs-milestone/.lastUpdated=1649670360557
