@@ -20,14 +20,14 @@ public class DiCurrentResultAndTablesDao {
     final StringBuilder FIND_CURRENTRESULT_AND_TABLE_SQL_STATEMENT = new StringBuilder()
             .append("select ")
             .append("* ")
-            .append("from di_current_result c left join di_tables t ")
+            .append("from di_current_result c join di_tables t ")
             .append("on c.table_name = t.table_name and c.table_owner = t.table_owner ");
 
     private String getSqlStatement(Constant.TableType tableType) {
         if(tableType.equals(Constant.TableType.ALL))
             return FIND_CURRENTRESULT_AND_TABLE_SQL_STATEMENT.toString();
         else
-            return FIND_CURRENTRESULT_AND_TABLE_SQL_STATEMENT.append("where c.table_name = ? ").toString();
+            return FIND_CURRENTRESULT_AND_TABLE_SQL_STATEMENT.append("where c.table_name = ? and c.table_owner = ? ").toString();
     }
 
     Logger logger = LoggerFactory.getLogger(DiCurrentResultAndTablesDao.class);
@@ -43,10 +43,11 @@ public class DiCurrentResultAndTablesDao {
         logger.info("Init Oracle JDBC Connection");
     }
 
-    public List<DiCurrentResultAndTables> findByTableName(String tableName) {
+    public List<DiCurrentResultAndTables> findByTableName(String tableName, String tableOwner) {
         List<Object> paramList  = new ArrayList<>();
         paramList.add(tableName);
-        logger.info("Beginning query current result and table By Name: "+ tableName);
+        paramList.add(tableOwner);
+        logger.info("Beginning query current result and table By Name: " + tableName +" and Owner: " + tableOwner);
         return this.jdbcTemplate.query(this.getSqlStatement(Constant.TableType.SINGLE)
                 , paramList.toArray(), new DiCurrentResultAndTablesMapper());
     }

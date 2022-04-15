@@ -25,18 +25,18 @@ public class EntryService {
     @Qualifier("SaveResultService")
     private SaveResultService saveResultService;
 
-    public void executed(String tableName) throws Exception {
+    public void executed(String tableName, String tableOwner) throws Exception {
         List<DiConfigAndTables> listDiConfig ;
         List<DiHistoryResult> diHistoryResultList = new ArrayList<>();
         Map<String, DiCurrentResult> diCurrentResultMap = new HashedMap();
-        if (tableName.trim().toLowerCase().equals("all"))
+        if (tableName.trim().toLowerCase().equals("all") || tableOwner.trim().toLowerCase().equals("all"))
             listDiConfig = configService.findAllDiConfigAndTables();
         else
-            listDiConfig = configService.findDiConfigAndTable(tableName);
+            listDiConfig = configService.findDiConfigAndTable(tableName, tableOwner);
 
         for(DiConfigAndTables c : listDiConfig) {
             Map<DBType,String> result = dAOSerivceAggregate.execute(
-                    c.getTableName()
+                    c.getTableOwner() + "." + c.getTableName()
                     ,c.getCondition()
                     ,c.getConditionColumn()
             );

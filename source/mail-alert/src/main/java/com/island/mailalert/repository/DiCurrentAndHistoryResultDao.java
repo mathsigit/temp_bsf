@@ -29,7 +29,7 @@ public class DiCurrentAndHistoryResultDao {
         if(tableType.equals(Constant.TableType.ALL))
             return FIND_CURRENT_AND_HISTORY_RESULT_SQL_STATEMENT.toString();
         else
-            return FIND_CURRENT_AND_HISTORY_RESULT_SQL_STATEMENT.append("where c.table_name = ? ").toString();
+            return FIND_CURRENT_AND_HISTORY_RESULT_SQL_STATEMENT.append("where c.table_name = ? and c.table_owner = ? ").toString();
     }
 
     Logger logger = LoggerFactory.getLogger(DiCurrentAndHistoryResultDao.class);
@@ -45,10 +45,11 @@ public class DiCurrentAndHistoryResultDao {
         logger.info("Init Oracle JDBC Connection");
     }
 
-    public List<DiCurrentAndHistoryResult> findByTableName(String tableName) {
+    public List<DiCurrentAndHistoryResult> findByTableName(String tableName, String tableOwner) {
         List<Object> paramList  = new ArrayList<>();
         paramList.add(tableName);
-        logger.info("Beginning query current and history result By Name: "+ tableName);
+        paramList.add(tableOwner);
+        logger.info("Beginning query current and history result By Name: "+ tableName + " and Owner: " + tableOwner);
         return this.jdbcTemplate.query(this.getSqlStatement(Constant.TableType.SINGLE)
                 , paramList.toArray(), new DiCurrentAndHistoryResultMapper());
     }

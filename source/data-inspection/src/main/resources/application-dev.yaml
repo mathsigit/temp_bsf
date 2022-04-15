@@ -8,7 +8,7 @@ logging:
 
 jasypt:
   encryptor:
-    password: Island
+    password: island
 
 
 

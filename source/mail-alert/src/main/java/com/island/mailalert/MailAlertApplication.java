@@ -23,6 +23,9 @@ public class MailAlertApplication implements ApplicationRunner {
 	@Value("${table.name:#{null}}")
 	private String tableName;
 
+	@Value("${table.owner:#{null}}")
+	private String tableOwner;
+
 	@Autowired
 	EntryService entryService;
 
@@ -39,6 +42,6 @@ public class MailAlertApplication implements ApplicationRunner {
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void execute() throws Exception {
-		entryService.executed(this.tableName);
+		entryService.executed(this.tableName, this.tableOwner);
 	}
 }

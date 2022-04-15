@@ -8,13 +8,18 @@ logging:
 
 jasypt:
   encryptor:
-    password: Fubon999
+    password: fubon
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
 
 mail:
   sender:
-    email: "kfk.monitor@fubon.com"
+    email: "noreply@fubon.com"
+    passwd: ENC(WEFHaycaZBurnujSJ+nUGAHHXkgwvhKF)
   smtp:
-    host: "apsmtp.fbt.com"
-    port: "25"
+    host: "smtp.gmail.com"
+    port: "465"
+    auth: "true"
+    socketfactory:
+      port: "465"
+      class: "javax.net.ssl.SSLSocketFactory"

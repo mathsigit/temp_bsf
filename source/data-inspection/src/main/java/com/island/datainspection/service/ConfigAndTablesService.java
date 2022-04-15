@@ -21,15 +21,19 @@ public class ConfigAndTablesService {
     @Qualifier("DiConfigAndTablesDao")
     private DiConfigAndTablesDao diConfigAndTablesDao;
 
-    public List<DiConfigAndTables> findDiConfigAndTable(String tableName) throws Exception {
-        Optional<String> opt = Optional.ofNullable(tableName);
-        if(!opt.isPresent()) {
+    public List<DiConfigAndTables> findDiConfigAndTable(String tableName, String tableOwner) throws Exception {
+        Optional<String> optTableName = Optional.ofNullable(tableName);
+        Optional<String> optTableOwner = Optional.ofNullable(tableOwner);
+        if(!optTableName.isPresent()) {
             throw new NullValueException("Table name is null or empty!");
         }
+        if(!optTableOwner.isPresent()) {
+            throw new NullValueException("Table Owner is null or empty!");
+        }
 
-        List<DiConfigAndTables> diConfigAndTables = diConfigAndTablesDao.findDiConfigAndTableByTableName(tableName);
+        List<DiConfigAndTables> diConfigAndTables = diConfigAndTablesDao.findDiConfigAndTableByTableName(tableName, tableOwner);
         if(diConfigAndTables.size() == 0) {
-            throw new NoSuchElementException("No result of table : " + tableName + ", please confirm the table name!");
+            throw new NoSuchElementException("No result of table : " + tableName + " with owner : " + tableOwner + ", please confirm the table name and owner!");
         }
         if(!checkSingleTableRecord(diConfigAndTables, tableName))
             throw new TooManyRowsAffectedException("There should be only one row data in table_name: "+ tableName +", please confirm view: tws_job_streams_v.", 1, -99999);
@@ -59,7 +63,7 @@ public class ConfigAndTablesService {
 
     private boolean checkSingleTableRecord(List<DiConfigAndTables> diConfigAndTablesList) {
         Map<String, Long> tableNameCountingMap = diConfigAndTablesList.stream()
-                .filter(distinctByKeys(DiConfigAndTables::getTableName, DiConfigAndTables::getStatus))
+                .filter(distinctByKeys(DiConfigAndTables::getTableName, DiConfigAndTables::getTableOwner, DiConfigAndTables::getStatus))
                 .collect(Collectors.groupingBy(DiConfigAndTables::getTableName, Collectors.counting()));
         Map<String, Long> moreThanOneMap = tableNameCountingMap.entrySet().stream()
                 .filter(m -> m.getValue() > 1)
@@ -70,7 +74,7 @@ public class ConfigAndTablesService {
     private boolean checkSingleTableRecord(List<DiConfigAndTables> diConfigAndTablesList, String tableName) {
         Map<String, Long> tableNameCountingMap = diConfigAndTablesList.stream()
                 .filter(l -> l.getTableName().equals(tableName))
-                .filter(distinctByKeys(DiConfigAndTables::getTableName, DiConfigAndTables::getStatus))
+                .filter(distinctByKeys(DiConfigAndTables::getTableName, DiConfigAndTables::getTableOwner, DiConfigAndTables::getStatus))
                 .collect(Collectors.groupingBy(DiConfigAndTables::getTableName, Collectors.counting()));
         Long conutingResult = tableNameCountingMap.get(tableName);
         return conutingResult == 1;

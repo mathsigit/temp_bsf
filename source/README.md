@@ -53,6 +53,7 @@ mvn clean install -o -gs settings.xml -DskipTests
 cd data-inspection/target
 
 java -jar \
+-Dtable.owner=bdp_pipe \
 -Dtable.name=ALL \
 -Djava.security.auth.login.config=absolute path of jaas.conf/hive-jaas.conf \
 -Djava.security.krb5.conf=absolute path of krb5.conf/krb5.conf \
@@ -63,6 +64,7 @@ data-inspection-0.0.1-SNAPSHOT.jar
 cd mail-alert/target
 
 java -jar \
+-Dtable.owner=bdp_pipe \
 -Dtable.name=ALL \
 mail-alert-0.0.1-SNAPSHOT.jar
 ```
@@ -74,6 +76,7 @@ cd target
 
 #data-inspection
 java -jar \
+-Dtable.owner=bdp_pipe \
 -Dtable.name=ALL \
 -Djava.security.auth.login.config=/Users/heyongan/Documents/git/github/mathsigit/DataInspection/data-inspection/dev/hive-jaas.conf \
 -Djava.security.krb5.conf=/Users/heyongan/Documents/git/github/mathsigit/DataInspection/data-inspection/dev/krb5.conf \
@@ -83,6 +86,7 @@ data-inspection-0.0.1-SNAPSHOT.jar
 
 #mail-alert
 java -jar \
+-Dtable.owner=bdp_pipe \
 -Dtable.name=ALL \
 -Dspring.profiles.active=dev \
 mail-alert-0.0.1-SNAPSHOT.jar

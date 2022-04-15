@@ -23,16 +23,16 @@ public class EntryService {
     @Qualifier("MailSenderService")
     private MailSenderService mailSenderService;
 
-    public void executed(String tableName) throws Exception {
+    public void executed(String tableName, String tableOwner) throws Exception {
         List<DiCurrentResultAndTables> diCurrentResultAndTablesList;
         List<DiCurrentAndHistoryResult> diCurrentAndHistoryResultList;
-        if (tableName.trim().toLowerCase().equals("all")) {
+        if (tableName.trim().toLowerCase().equals("all") || tableOwner.trim().toLowerCase().equals("all")) {
             diCurrentResultAndTablesList = currentResultAndTablesService.findALL();
             diCurrentAndHistoryResultList = currentAndHistoryResultService.findALL();
         }
         else {
-            diCurrentResultAndTablesList = currentResultAndTablesService.findByName(tableName);
-            diCurrentAndHistoryResultList = currentAndHistoryResultService.findByName(tableName);
+            diCurrentResultAndTablesList = currentResultAndTablesService.findByName(tableName, tableOwner);
+            diCurrentAndHistoryResultList = currentAndHistoryResultService.findByName(tableName, tableOwner);
         }
 
         mailSenderService.send(diCurrentResultAndTablesList, diCurrentAndHistoryResultList);

@@ -1,6 +1,6 @@
 spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    jdbc-url: jdbc:oracle:thin:@172.17.241.246:5211:TSID
-    username: ENC(s5IFxjJ3zOoJQXtFnqePwwnfAu5B/3sf)
-    password: ENC(cxWqr5ExAvvE4aRwx8pHHOTSBj98Ouko)
+    jdbc-url: jdbc:oracle:thin:@10.3.0.73:1521:devzxsm
+    username: ENC(MUuq6j1C0gJqVZE85gbOJR2fXd2jbnBn)
+    password: ENC(KvVLNNJRp0sc26tfUXPhhKOms3H278XO)

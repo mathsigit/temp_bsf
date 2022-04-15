@@ -21,6 +21,9 @@ public class DataInspectionApplication implements ApplicationRunner {
 	@Value("${table.name:#{null}}")
 	private String tableName;
 
+	@Value("${table.owner:#{null}}")
+	private String tableOwner;
+
 	@Autowired
 	EntryService entryService;
 
@@ -33,11 +36,13 @@ public class DataInspectionApplication implements ApplicationRunner {
 
 		if (tableName == null)
 			throw new AopConfigException("The property -Dtable.name must be set!");
-		logger.info("Application started to calculate table: {}", tableName);
+		if (tableOwner == null)
+			throw new AopConfigException("The property -Dtable.owner must be set!");
+		logger.info("Application started to calculate table: {} and owner: {}", tableName, tableOwner);
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void execute() throws Exception {
-		entryService.executed(this.tableName);
+		entryService.executed(this.tableName, this.tableOwner);
 	}
 }

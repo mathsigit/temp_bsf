@@ -16,15 +16,19 @@ public class CurrentResultAndTablesService {
     @Qualifier("DiCurrentResultAndTablesDao")
     private DiCurrentResultAndTablesDao diCurrentResultAndTablesDao;
 
-    public List<DiCurrentResultAndTables> findByName(String tableName) throws Exception {
-        Optional<String> opt = Optional.ofNullable(tableName);
-        if(!opt.isPresent()) {
+    public List<DiCurrentResultAndTables> findByName(String tableName, String tableOwner) throws Exception {
+        Optional<String> optName = Optional.ofNullable(tableName);
+        Optional<String> optOwner = Optional.ofNullable(tableOwner);
+        if(!optName.isPresent()) {
             throw new Exception("Table name is null or empty!");
         }
+        if(!optOwner.isPresent()) {
+            throw new Exception("Table owner is null or empty!");
+        }
         List<DiCurrentResultAndTables> diCurrentResultAndTablesList =
-                diCurrentResultAndTablesDao.findByTableName(tableName);
+                diCurrentResultAndTablesDao.findByTableName(tableName, tableOwner);
         if( diCurrentResultAndTablesList.size() == 0 ) {
-            throw new NoSuchElementException("No result of table : " + tableName + ", please confirm the table name!");
+            throw new NoSuchElementException("No result of table : " + tableName + " with owner : " + tableOwner + ", please confirm the table name!");
         }
 
         return diCurrentResultAndTablesList;

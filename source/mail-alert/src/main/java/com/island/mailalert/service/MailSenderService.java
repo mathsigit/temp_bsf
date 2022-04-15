@@ -49,6 +49,7 @@ public class MailSenderService {
             if(c.getJobStreamStatus().equals("SUCC") && c.getInspection().equals("N")) {
                 List<DiCurrentAndHistoryResult> singleTableResult = diCurrentAndHistoryResultList.stream()
                         .filter(tr -> tr.getTableName().equals(c.getTableName()))
+                        .filter(tr -> tr.getTableOwner().equals(c.getTableOwner()))
                         .collect(Collectors.toList());
                 Message message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(mailConfigBean.getSenderEmail()));
