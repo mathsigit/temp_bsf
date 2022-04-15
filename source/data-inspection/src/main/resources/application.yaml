@@ -8,6 +8,6 @@ logging:
 
 jasypt:
   encryptor:
-    password: fubon
+    password: Fubon999
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
