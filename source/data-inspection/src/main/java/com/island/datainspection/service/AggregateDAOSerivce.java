@@ -25,7 +25,7 @@ public class AggregateDAOSerivce {
     @Qualifier("OracleDBDao")
     private OracleAggregateDao oracleDBDao;
 
-    public Map<DBType,String> execute(String tableName, String condition, String condition_column) {
+    public Map<DBType,String> execute(String tableName, String condition, String condition_column) throws Exception {
         if(condition_column.trim().isEmpty() || condition_column == null) {
             throw new NullValueException("Condition Column is null or empty value!");
         }
@@ -38,16 +38,23 @@ public class AggregateDAOSerivce {
         String sqlStatment = SELECT_AGGREGATE_STATEMENT
                 .replace("@agg", aggColumnStatment)
                 .replace("@table", tableName);
-        //1936758
-        List<Map<String, Object>> oracleAGGResultSet = oracleDBDao.query(sqlStatment);
-        //7009728
-        List<Map<String, Object>> hiveAGGResultSet = hiveDBDao.query(sqlStatment);
-        String oracleAGGResult = oracleAGGResultSet.get(0).entrySet().stream().findFirst().get().getValue().toString();
-        logger.info("Oracle aggregate "+ aggColumnStatment +" finished! And result : "+ oracleAGGResult);
-        String hiveAGGResult = hiveAGGResultSet.get(0).entrySet().stream().findFirst().get().getValue().toString();
-        logger.info("Hive aggregate "+ aggColumnStatment +" finished: "+ hiveAGGResult);
-        resultMap.put(DBType.HIVE, hiveAGGResult);
-        resultMap.put(DBType.ORACLE, oracleAGGResult);
+        try{
+            List<Map<String, Object>> oracleAGGResultSet = oracleDBDao.query(sqlStatment);
+            List<Map<String, Object>> hiveAGGResultSet = hiveDBDao.query(sqlStatment);
+            logger.info("Beginning Oracle aggregate : "+ sqlStatment);
+            String oracleAGGResult = oracleAGGResultSet.get(0).entrySet().stream().findFirst().get().getValue().toString();
+            logger.info("Oracle aggregate "+ aggColumnStatment +" finished! And result : "+ oracleAGGResult);
+            logger.info("Beginning Hive aggregate : "+ sqlStatment);
+            String hiveAGGResult = hiveAGGResultSet.get(0).entrySet().stream().findFirst().get().getValue().toString();
+            logger.info("Hive aggregate "+ aggColumnStatment +" finished: "+ hiveAGGResult);
+            resultMap.put(DBType.HIVE, hiveAGGResult);
+            resultMap.put(DBType.ORACLE, oracleAGGResult);
+        }catch(NullPointerException ex){
+            throw new NullPointerException("Return null when aggregating from Oracle/Hive with sql statement: " + sqlStatment +
+                    " ,checking the result of the sql statement.");
+        }catch(Exception ex){
+            throw new Exception(ex);
+        }
         return resultMap;
     }
 }

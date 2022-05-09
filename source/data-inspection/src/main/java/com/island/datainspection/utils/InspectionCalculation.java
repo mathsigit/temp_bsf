@@ -38,7 +38,7 @@ public class InspectionCalculation {
         double oResult = Double.parseDouble(aggregateResult.get(DBType.ORACLE));
         double hResult = Double.parseDouble(aggregateResult.get(DBType.HIVE));
         double actualThreshold = ( 1 + (hResult - oResult)/oResult) * 100;
-        if(actualThreshold > Double.parseDouble(threshold))
+        if(actualThreshold >= Double.parseDouble(threshold))
             return "Y";
         else
             return  "N";
